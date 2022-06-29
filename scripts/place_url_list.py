@@ -19,9 +19,6 @@ url = "https://kr.trip.com/global-search/searchlist/search/?keyword={search}&fro
 url = url.format(search=search)
 
 # URL 접속
-# 왕경훈 : 
-# 진수현 : 
-# 한호 : C:/Users/madda/.ssh/project_3/chromedriver.exe
 driver = webdriver.Chrome(config["Chromedriver"],options=options)
 driver.get(url)
 
