@@ -1,3 +1,4 @@
+from tracemalloc import start
 import selenium 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -18,24 +19,24 @@ driver.get("https://google.com")
 place_url_list = pd.read_csv("../data/tripcom_place_url_list.csv")
 place_url_list = place_url_list["URL"]
 
-# 데이터 저장
-score_list = []                # 리뷰 평점 
-score_date_list = []       # 리뷰 작성일
-coment_list = []            # 리뷰(원문)
-coment_trans_list = []  # 리뷰(번역)
-place_list = []                # 장소
-place_type_list = []       # 장소 분류
-bnt_list = []                   # 운영시간
-rcm_time_list = []         # 추천관광시간
-address_list = []            # 주소
-place_name = []           # 댓글 장소 구분
 
 
 # 페이지 들어가기
-start_place_number = 1
-end_place_number = 2
+start_place_number = 419
+end_place_number = 682
 place_number = start_place_number
 for place in place_url_list[start_place_number:end_place_number]:
+
+    # 데이터 저장
+    review_info = []
+    place_list = []                # 장소
+    place_type_list = []       # 장소 분류
+    bnt_list = []                   # 운영시간
+    rcm_time_list = []         # 추천관광시간
+    address_list = []            # 주소
+    place_name = []           # 댓글 장소 구분
+    review_page_number = []         # 리뷰 페이지
+
     place_number += 1
     review_page = 0
     driver.get(place)
@@ -94,8 +95,10 @@ for place in place_url_list[start_place_number:end_place_number]:
     ## 주소 
     address_list.append(address)
 
-    # 리뷰
+    # css
     review_pages = driver.find_elements_by_css_selector("div.gl-poi-detail_page ul.gl-cpt-pager > li")
+    
+
     try :
         review_page = review_pages[-1].text
         print(f'총 페이지 수 : {review_page}')
@@ -108,64 +111,66 @@ for place in place_url_list[start_place_number:end_place_number]:
             print(f'{place_number}번장소 : {place_css.text}')
             print(f'페이지 : {page+1}/{review_page} 실행 중')
             time.sleep(3)
-            try:
-                score_css = driver.find_elements_by_css_selector("div.gl-poi-detail_comment-content > div.ovh > span:nth-child(1)")
-                for score in score_css:
-                    score_list.append(score.text)
-            except:
-                print("e")
-                
 
+            contents = driver.find_elements_by_css_selector("div.gl-poi-detail_comment-content")
+            for content in contents:
+                try :
+                    point = content.find_element_by_css_selector("span.review_score.score-name")
+                    point_value = point.text
+                    print(point_value)
+                    date = content.find_element_by_css_selector("span.r.c2.create-time")
+                    date_value = date.text
+                    date_value = date_value.split(" ")
+                    date_value = date_value[1] + date_value[2] + date_value[3]
+                    print(date_value)
+                    comment = content.find_element_by_css_selector("div.gl-poi-detail_comment-content > div > a")
+                    comment_value = comment.get_attribute("alt")
+                    print(comment_value)
+                    comment_trans = content.find_element_by_css_selector("div.gl-poi-detail_comment-content > div > a > p")
+                    comment_trans_value = comment_trans.text
+                    print(comment_trans_value)
+                    review_info.append([place_css.text,page+1,point_value,date_value,comment_value,comment_trans_value])
+                except selenium.common.exceptions.NoSuchElementException:
+                    point_value = "평가없음"
+                    date = content.find_element_by_css_selector("span.r.c2.create-time")
+                    date_value = date.text
+                    date_value = date_value.split(" ")
+                    date_value = date_value[1] + date_value[2] + date_value[3]
+                    print(date_value)
+                    comment = content.find_element_by_css_selector("div.gl-poi-detail_comment-content > div > a")
+                    comment_value = comment.get_attribute("alt")
+                    print(comment_value)
+                    comment_trans = content.find_element_by_css_selector("div.gl-poi-detail_comment-content > div > a > p")
+                    comment_trans_value = comment_trans.text
+                    print(comment_trans_value)
+                    review_info.append([place_css.text,page+1,point_value,date_value,comment_value,comment_trans_value])
                     
-            date_css = driver.find_elements_by_css_selector("span.r.c2.create-time")
-            coment_css = driver.find_elements_by_css_selector('div.gl-poi-detail_comment-content > div > a')
-            coment_trans_css = driver.find_elements_by_css_selector('div.gl-poi-detail_comment-content > div > a > p')
-            
-            
 
-            for point in date_css:
-                date = point.text
-                date = date.split(" ")
-                date = date[1] + date[2] + date[3]
-                score_date_list.append(date)
-
-
-            ## 리뷰(원문)
-            for place in coment_css :
-                coment = place.get_attribute("alt")
-                coment_list.append(coment)
-
-
-            ## 리뷰(번역)
-            for place in coment_trans_css:
-                coment_trans = place.text
-                coment_trans_list.append(coment_trans)
-                place_name.append(place_css.text)
-            
             if page < (int(review_page)-1):
-                driver.find_element_by_css_selector('div.gl-poi-detail_page div.gl-cpt-pagination > button.btn-next').send_keys(Keys.ENTER)         
-            
+                driver.find_element_by_css_selector('div.gl-poi-detail_page div.gl-cpt-pagination > button.btn-next').send_keys(Keys.ENTER) 
+
             print(f'페이지 {page+1}/{review_page} 실행 완료')
-    
+
+
     except:
         pass   
 
-
-info_table = [place_list,place_type_list,bnt_list,rcm_time_list,address_list]
-info_table = pd.DataFrame(info_table).T
-info_table.columns = ["장소","분류","운영시간","관광추천시간","주소"]
-if not os.path.exists("../data/tripcom_place_info_table.csv"):
-    info_table.to_csv("../data/tripcom_place_info_table.csv", index = False, mode = "w", encoding = "utf-8-sig")
-else :
-    info_table.to_csv("../data/tripcom_place_info_table.csv", index = False, mode = "a", encoding = "utf-8-sig",header = False)
-
+    info_table = [place_list,place_type_list,bnt_list,rcm_time_list,address_list]
+    info_table = pd.DataFrame(info_table).T
+    info_table.columns = ["장소","분류","운영시간","관광추천시간","주소"]
+    if not os.path.exists("../data/tripcom_place_info_table.csv"):
+        info_table.to_csv("../data/tripcom_place_info_table.csv", index = False, mode = "w", encoding = "utf-8-sig")
+    else :
+        info_table.to_csv("../data/tripcom_place_info_table.csv", index = False, mode = "a", encoding = "utf-8-sig",header = False)
 
 
-review_table = [place_name,score_list,score_date_list,coment_list,coment_trans_list]
-review_table = pd.DataFrame(review_table).T
-review_table.columns = ["장소","평점","작성일","리뷰(원문)","리뷰(번역)"]
-review_table["평점"] = review_table["평점"].replace(["완벽해요!","최고에요!","좋아요!","보통이에요","최악이에요"],[5,4,3,2,1])
-if not os.path.exists("../data/tripcom_place_info_table.csv"):
-    review_table.to_csv("../data/tripcom_place_review_table.csv", index = False, mode = "w", encoding = "utf-8-sig")
-else :
-    review_table.to_csv("../data/tripcom_place_review_table.csv", index = False, mode = "a", encoding = "utf-8-sig",header = False)
+    review_table = review_info
+    review_table = pd.DataFrame(review_table, columns = ["장소","리뷰페이지","평점","작성일","리뷰(원문)","리뷰(번역)"])
+    review_table["평점"] = review_table["평점"].replace(["완벽해요!","최고에요!","좋아요!","보통이에요","최악이에요"],[5,4,3,2,1])
+    if not os.path.exists("../data/tripcom_place_info_table.csv"):
+        review_table.to_csv("../data/tripcom_place_review_table.csv", index = False, mode = "w", encoding = "utf-8-sig")
+    else :
+        review_table.to_csv("../data/tripcom_place_review_table.csv", index = False, mode = "a", encoding = "utf-8-sig",header = False)
+
+
+
