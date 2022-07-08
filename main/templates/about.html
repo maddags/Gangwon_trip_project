@@ -42,10 +42,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:index' %}">home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:about' %}">최신여행지정보</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:post' %}">Sample Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:contact' %}">Contact</a></li>
+                      <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:index' %}">home</a></li>
+                      <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:about' %}">news</a></li>
+                      <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:post' %}">dashboard</a></li>
+                      <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:contact' %}">about</a></li>
                     </ul>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                                 {% if s.post_url == data.news_url %}
                               <div class="row">
                                 <div class="col-4">
-                                  <div class="img" style="background-image: url('{{ s.img_url }}'); background-size: cover;"></div>
+                                  <div class="img h-100" style="background-image: url('{{ s.img_url }}'); background-size: cover; "></div>
                                 </div>
                                 <div class="col-8">
                                   <span class="font-weight-bold">{{ s.card_title }}</span><br>

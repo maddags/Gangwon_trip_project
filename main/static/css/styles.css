@@ -67,6 +67,7 @@
 *,
 *::before,
 *::after {
+  
   box-sizing: border-box;
 }
 
@@ -669,9 +670,10 @@ progress {
   --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(-1 * var(--bs-gutter-y));
-  margin-right: calc(-0.5 * var(--bs-gutter-x));
-  margin-left: calc(-0.5 * var(--bs-gutter-x));
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px; 
+  margin-bottom: 10px;
 }
 .row > * {
   flex-shrink: 0;
@@ -11113,8 +11115,8 @@ blockquote {
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 header.masthead {
@@ -11247,8 +11249,5 @@ header.masthead .site-heading .h1 {
   }
 }
 
-/* tr th {
-  text-align:center;
-  vertical-align: middle;
-  font-size: small;
-} */
+
+

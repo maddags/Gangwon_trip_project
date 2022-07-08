@@ -15,10 +15,15 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+
+        <!-- about_part -->    
+        <link rel="stylesheet" href="{% static 'css/about_animate.css'%}">
+        <link rel="stylesheet" href="{% static 'css/about.css'%}">
+
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style="flex:none;">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'main:index' %}">강원도 여행지 정보</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,9 +33,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:index' %}">home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:about' %}">최신여행지정보</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:post' %}">Sample Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:contact' %}">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:about' %}">news</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:post' %}">dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:contact' %}">about</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,8 +45,8 @@
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="page-heading">
-                            <h1>Contact Me</h1>
+                        <div class="page-heading" >
+                            <h1 style="color:white; font-size: 5rem; font-weight:700;">About Us</h1>
                         </div>
                     </div>
                 </div>
@@ -49,65 +54,62 @@
         </header>
         <!-- Main Content-->
         <main class="mb-4">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
-                        <div class="my-5">
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- * * SB Forms Contact Form * *-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- This form is pre-integrated with SB Forms.-->
-                            <!-- To make this form functional, sign up at-->
-                            <!-- https://startbootstrap.com/solution/contact-forms-->
-                            <!-- to get an API token!-->
-                            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <div class="form-floating">
-                                    <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                    <label for="name">Name</label>
-                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
-                                    <label for="email">Email address</label>
-                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <input class="form-control" id="phone" type="tel" placeholder="Enter your phone number..." data-sb-validations="required" />
-                                    <label for="phone">Phone Number</label>
-                                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                                </div>
-                                <div class="form-floating">
-                                    <textarea class="form-control" id="message" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
-                                    <label for="message">Message</label>
-                                    <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                                </div>
-                                <br />
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        To activate this form, sign up at
-                                        <br />
-                                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                                <!-- Submit Button-->
-                                <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Send</button>
-                            </form>
+            <section class="ftco-section">
+                <div class="container">
+                    <div class="row d-md-flex">
+                        <div class="col-md-6 ftco-animate img about-image" style="background-image: url({% static 'img/bg-post.jpg' %}); background-size: cover;">
                         </div>
+                        <div class="col-md-6 ftco-animate p-md-5">
+                            <div class="row">
+                          <div class="col-md-12 nav-link-wrap mb-5">
+                            <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                              <a class="nav-link active" id="v-pills-whatwedo-tab" data-toggle="pill" href="#v-pills-whatwedo" role="tab" aria-controls="v-pills-whatwedo" aria-selected="true" style="background-Color:gray;">팀원소개</a>
+        
+                              <a class="nav-link" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false" style="background-Color:gray;">추진배경</a>
+        
+                              <a class="nav-link" id="v-pills-goal-tab" data-toggle="pill" href="#v-pills-goal" role="tab" aria-controls="v-pills-goal" aria-selected="false" style="background-Color:gray;">서비스</a>
+                            </div>
+                          </div>
+                          <div class="col-md-12 d-flex align-items-center">
+                            
+                            <div class="tab-content ftco-animate" id="v-pills-tabContent">
+        
+                              <div class="tab-pane fade show active" id="v-pills-whatwedo" role="tabpanel" aria-labelledby="v-pills-whatwedo-tab">
+                                  <div>
+                                    
+                                    <p><h3>한호</h3>mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                                    <p><h3>진수현</h3>mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                                    <p><h3>왕경훈</h3>mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                                    </div>
+                              </div>
+        
+                              <div class="tab-pane fade" id="v-pills-mission" role="tabpanel" aria-labelledby="v-pills-mission-tab">
+                                <div>
+                                    <h2 class="mb-4">개요</h2>
+                                      <p >지난 2년간 코로나 시국으로 인해 국내여행 횟수가 감소했고
+                                        코로나로 인한 사회적 거리두기 해제 이후 2022년 첫 여름으로 
+                                        휴가를 떠나는 여행객이 증가할것으로 예상됩니다. 
+                                    <p >또한, 코로나 19이후 재방문 지역 1순위가 강원도라는 점과 리뷰의 중요성이 점점 증가하고 있다는 점을
+                                        고려해 "리뷰를 통한 강원도 관광지 추천" 이라는 서비스를 개발 하게되었습니다. 
+                                        </p>
+                                    
+                                    </div>
+                              </div>
+        
+                              <div class="tab-pane fade" id="v-pills-goal" role="tabpanel" aria-labelledby="v-pills-goal-tab">
+                                <div>
+                                    <h2 class="mb-4">리뷰분석을 통한 강원도 관광지 추천</h2>
+                                      <p>관광사이트 리뷰분석을 통해 최적의 관광지 추천 서비스를 제공하고 있습니다. 사용자가 키워드를 선택해 관광지 추천을 받을 수 있고 최신 여행지 정보도 제공하고 있습니다.</p>
+                                    
+                                    </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
         <!-- Footer-->
         <footer class="border-top">
@@ -128,5 +130,19 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        
+        <!-- about_part -->
+        {% static 'js/scripts.js'%}
+        <script src="{% static 'js/about/jquery.min.js'%}"></script>
+        <script src="{% static 'js/about/jquery-migrate-3.0.1.min.js'%}"></script>  
+        <script src="{% static 'js/about/bootstrap.min.js'%}"></script> 
+        <script src="{% static 'js/about/jquery.waypoints.min.js'%}"></script>
+        <script src="{% static 'js/about/jquery.stellar.min.js'%}"></script>
+        <script src="{% static 'js/about/owl.carousel.min.js'%}"></script> 
+        <script src="{% static 'js/about/aos.js'%}"></script>
+        <script src="{% static 'js/about/scrollax.min.js'%}"></script>
+        <script src="{% static 'js/about/main.js'%}"></script>
+
+
     </body>
 </html>
