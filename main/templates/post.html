@@ -43,7 +43,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="{% url 'main:index' %}">강원도 여행지 정보</a>
+                <a class="navbar-brand" href="{% url 'main:index' %}">Travearch</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -52,7 +52,7 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:index' %}">home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:about' %}">news</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:post' %}">dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:post' %}">recommend</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'main:contact' %}">about</a></li>
                         
                     </ul>
@@ -65,7 +65,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1 style="font-size: 5rem; font-weight:700;">dashboard</h1>
+                            <h1 style="font-size: 5rem; font-weight:700;">Recommend</h1>
                         </div>
                     </div>
                 </div>
@@ -73,57 +73,6 @@
         </header>
         <!-- Main Content-->
         <main class="content" style="padding: 0.5rem 2rem 2rem;">
-            <div class="row">
-                <div class="col d-flex">
-                    <div class="card flex-fill w-100">
-                        <div class="card-header">
-
-                            <h5 class="card-title mb-0">키워드 순위</h5>
-                        </div>
-                        <div class="card-body d-flex">
-                            <div class="align-self-center w-100">
-
-
-                                <table class="table mb-0">
-                                    <div class="card">
-                                        <div class="card-body">
-                                              <h4 class="card-title">키워드별 리뷰수</h4>
-                                              <div><canvas id="myChart"></canvas></div>
-                                        </div>
-                                    </div>
-                                    
-
-                                
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col d-flex">
-                    <div class="card flex-fill">
-                        <div class="card-header">
-
-                            <h5 class="card-title mb-0">그래프</h5>
-                        </div>
-                        <div class="card-body d-flex">
-                            <div class="align-self-center w-100">
-                                <table class="table mb-0">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title">단어 빈도수</h4>
-                                            <div><canvas id="bar-chart"></canvas></div>
-                                        </div>
-                                    </div>
-                                    
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row" style="margin-top:20px; margin-bottom:10px;">
                 <div class="col-12 d-flex">
@@ -160,6 +109,8 @@
                                 </div>
                               </div>
 
+                            
+
                             <div class="row mt-5 mx-0" >
                                 <div class="col d-grid mt-6 ">
                                     <button class="btn btn-secondary fs-5" type="submit" onclick="location.href='{% url 'main:about' %}';">관광지 추천받기</button>
@@ -174,6 +125,75 @@
                 </div>
 
             </div>
+
+            <div class="row mx-2 fs-3 fw-bold">관광지 키워드 정보</div>
+
+            <div class="row">
+                <div class="col d-flex">
+                    <div class="card flex-fill w-100">
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">키워드별 리뷰수</h5>
+                        </div>
+                        <div class="card-body d-flex">
+                            <div class="align-self-center w-100">
+
+
+                                <table class="table mb-0">
+                                    <div class="card">
+                                        <div class="card-body">
+                                              <h4 class="card-title"></h4>
+                                              <div><canvas id="myChart"></canvas></div>
+                                        </div>
+                                    </div>
+                                    
+
+                                
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">단어 빈도수</h5>
+                        </div>
+                        <div class="card-body d-flex">
+                            <div class="align-self-center w-100">
+                                <table class="table mb-0">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title"></h4>
+                                            <div><canvas id="bar-chart"></canvas></div>
+                                        </div>
+                                    </div>
+                                    
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+
+
+            <div class="col d-flex">
+                <div class="card flex-fill">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">실시간 사용자 입력 단어 순위</h5>
+                    </div>
+                    <div><canvas id="wordcnt-chart"></canvas></div>
+                </div>
+            </div>
+
+
+
+
 
         </div>
         </main>
@@ -217,6 +237,8 @@
             const cnt_review = {{ cnt_review }};
             const labels2 = [{% for word in words %} '{{ word }}', {% endfor %}];
             const cnt_word = {{ cnt_word }};
+            const labels3 = [{%for keyword in input_keywords %} '{{ keyword.keyword }}', {% endfor %}];
+            const cnt_keyword = [{%for keyword in input_keywords %} {{ keyword.count }}, {% endfor %}];
         </script>
         <script src="{% static 'js/chartconf.js'%}"></script>
     </body>
